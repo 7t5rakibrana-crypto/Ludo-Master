@@ -3,8 +3,8 @@ body{margin:0;font-family:Arial;background:#08783b;color:#fff}header{background:
 <header><h2>🥰 লুডু মাস্টার App সাগতম 🥰</h2></header>
 <nav><button onclick="show('home')">Home</button><button onclick="show('matches')">🎮 Matches</button><button onclick="show('deposit')">💰 Deposit</button><button onclick="show('profile')">👤 Profile</button><button onclick="show('admin')">🔐 Admin</button></nav>
 <section id="home" class="page"><div class="card"><h3>Welcome</h3><p>লুডু মাস্টারে স্বাগতম।</p></div></section>
-<section id="matches" class="page hidden"><div class="card"><h3>🎮 Matches</h3><p>Matches এখানে থাকবে।</p></div></section>
+<section id="matches" class="page show"><div class="card"><h3>🎮 Matches</h3><p>Matches এখানে থাকবে।</p></div></section>
 <section id="deposit" class="page show"><div class="card"><h3>💰 Deposit</h3><p>Payment method নির্বাচন করুন:</p><div class="pay"><button id="bk" onclick="pay('bkash')">🟣 bKash</button><button id="ng" onclick="pay('nagad')">🟠 Nagad</button></div><div id="info" class="show"><p id="label"></p><div id="num" class="num"></div><button onclick="copyNum()">📋 Copy Number</button></div><label>Deposit Amount (৳)</label><input id="amount" type="number" placeholder="যেমন 100"><label>Transaction ID</label><input id="trx" placeholder="Transaction ID লিখুন"><button class="mainbtn" onclick="submitDeposit()">Deposit Submit</button><p id="msg"></p><small>Screenshot লাগবে না।</small></div></section>
-<section id="profile" class="page hidden"><div class="card"><h3>👤 Profile</h3></div></section>
-<section id="admin" class="page hidden"><div class="card"><h3>🔐 Admin Login</h3><input id="key" type="password" placeholder="Admin Login Key"><button class="mainbtn" onclick="login()">Login</button><p id="am"></p></div><div id="panel" class="card hidden"><h3>Deposit Requests</h3><div id="requests"></div></div></section>
+<section id="profile" class="page show"><div class="card"><h3>👤 Profile</h3></div></section>
+<section id="admin" class="page show"><div class="card"><h3>🔐 Admin Login</h3><input id="key" type="password" placeholder="Admin Login Key"><button class="mainbtn" onclick="login()">Login</button><p id="am"></p></div><div id="panel" class="car show"><h3>Deposit Requests</h3><div id="requests"></div></div></section>
 <script src="app.js"></script></body></html>
