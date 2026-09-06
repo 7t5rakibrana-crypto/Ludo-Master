@@ -8,3 +8,262 @@ body{margin:0;font-family:Arial;background:#08783b;color:#fff}header{background:
 <section id="profile" class="page show"><div class="card"><h3>👤 Profile</h3></div></section>
 <section id="admin" class="page show"><div class="card"><h3>🔐 Admin Login</h3><input id="key" type="password" placeholder="Admin Login Key"><button class="mainbtn" onclick="login()">Login</button><p id="am"></p></div><div id="panel" class="car show"><h3>Deposit Requests</h3><div id="requests"></div></div></section>
 <script src="app.js"></script></body></html>
+body {
+  background-image: url("<a href="https://www.vecteezy.com/vector-art/48262802-rolling-dices-blue-red-white-fast-ludo-token-pegs-background">rolling-dices-blue-red-white-fast-ludo-token-pegs-background Vectors by Vecteezy</a>")
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed
+}bo
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ludo Master - Admin Panel</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  background:linear-gradient(135deg,#087f23,#00a83b,#00551b);
+  color:white;
+}
+.container{
+  max-width:500px;
+  margin:auto;
+  padding:20px;
+}
+h1{text-align:center}
+.card{
+  background:rgba(0,60,25,.9);
+  padding:20px;
+  border-radius:18px;
+  margin:15px 0;
+}
+.player{
+  background:rgba(255,255,255,.1);
+  padding:12px;
+  margin:8px 0;
+  border-radius:10px;
+}
+.status{
+  text-align:center;
+  font-size:20px;
+  font-weight:bold;
+  padding:15px;
+}
+input{
+  width:100%;
+  padding:14px;
+  margin:8px 0;
+  border:0;
+  border-radius:10px;
+  font-size:16px;
+  box-sizing:border-box;
+}
+button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  margin-top:8px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.start{background:#ffd400;color:#111}
+.copy{background:#2196f3;color:white}
+.reset{background:#e53935;color:white}
+.code{
+  font-size:28px;
+  text-align:center;
+  letter-spacing:4px;
+  padding:15px;
+  background:#111;
+  border-radius:12px;
+}
+.hidden{display:none}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🎲 Ludo Master</h1>
+
+<div class="card">
+  <h2>👑 Admin Panel</h2>
+
+  <div class="status" id="status">
+    0 / 2 Players
+  </div>
+
+  <div id="players"></div>
+
+  <button class="start" id="startBtn" onclick="startMatch()" disabled>
+    ▶️ Start Match
+  </button>
+</div>
+
+<div class="card hidden" id="codeBox">
+
+  <h2>🎮 Ludo King Online Code</h2>
+
+  <p>২ জন Player Join করার পর Ludo King-এ Game তৈরি করে পাওয়া code এখানে বসাও:</p>
+
+  <input
+    id="ludoCode"
+    type="text"
+    placeholder="Ludo King Code লিখুন"
+  >
+
+  <button class="copy" onclick="sendCode()">
+    📤 Players-দের Code দিন
+  </button>
+
+  <div id="finalCode"></div>
+
+</div>
+
+<div class="card">
+  <button class="reset" onclick="resetMatch()">
+    🔄 Reset Match
+  </button>
+</div>
+
+</div>
+
+<script>
+
+let players = [];
+
+/* Demo হিসেবে ২টি Player Join করানো */
+function demoJoin(name){
+
+  if(players.length >= 2){
+    alert("এই ম্যাচে ইতিমধ্যে ২ জন Player আছে!");
+    return;
+  }
+
+  players.push({
+    name:name,
+    id:Date.now()
+  });
+
+  updatePanel();
+}
+
+/* Admin Panel update */
+function updatePanel(){
+
+  document.getElementById("status").innerText =
+    players.length + " / 2 Players";
+
+  let box = document.getElementById("players");
+  box.innerHTML = "";
+
+  players.forEach((player,index)=>{
+
+    box.innerHTML += `
+      <div class="player">
+        👤 Player ${index+1}: 
+        <b>${player.name}</b>
+        <br>
+        🟢 Ready
+      </div>
+    `;
+
+  });
+
+  let startBtn = document.getElementById("startBtn");
+
+  if(players.length === 2){
+    startBtn.disabled = false;
+    startBtn.innerText = "▶️ Start Match";
+  }else{
+    startBtn.disabled = true;
+  }
+}
+
+/* Start Match */
+function startMatch(){
+
+  if(players.length !== 2){
+    alert("২ জন Player Join না করা পর্যন্ত Start করা যাবে না!");
+    return;
+  }
+
+  document.getElementById("codeBox")
+    .classList.remove("hidden");
+
+  alert(
+    "২ জন Player Ready! এখন Ludo King খুলে Online Game তৈরি করুন।"
+  );
+}
+
+/* Code Players-দের দেওয়া */
+function sendCode(){
+
+  let code =
+    document.getElementById("ludoCode").value.trim();
+
+  if(!code){
+    alert("আগে Ludo King Online Code লিখুন!");
+    return;
+  }
+
+  document.getElementById("finalCode").innerHTML = `
+    <br>
+    <div class="code">${code}</div>
+    <button class="copy" onclick="copyCode()">
+      📋 Copy Code
+    </button>
+  `;
+
+  alert("Code Players-দের জন্য Ready!");
+}
+
+/* Copy */
+function copyCode(){
+
+  let code =
+    document.getElementById("ludoCode").value;
+
+  navigator.clipboard.writeText(code);
+
+  al
+}
+
+/* Reset */
+function resetMatch(){
+
+  players = [];
+
+  document.getElementById("codeBox")
+    .classList.add("hidden");
+
+  document.getElementById("ludoCode").value = "";
+
+  document.getElementById("finalCode").innerHTML = "";
+
+  updatePanel();
+}
+
+/*
+  DEMO:
+  বাস্তবে এই অংশ Player app-এর Join button
+  থেকে API/WebSocket দিয়ে আসবে।
+
+  Test করার জন্য নিচের দুই লাইন চালাতে পারো:
+*/
+
+demoJoin("Player 1");
+demoJoin("Player 2");
+
+</script>
+
+</body>
+  </html>
